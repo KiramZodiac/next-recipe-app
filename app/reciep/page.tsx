@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
@@ -13,7 +13,9 @@ dt:{
 
 }
 
-
+interface Recipe{
+name:string
+}
 
 
 function RecipesPage() {
@@ -27,7 +29,7 @@ const fetchData = async()=>{
 
 const res = await fetch('https://dummyjson.com/recipes')
 const result = await res.json()
-const all = result.recipes
+const all:Recipe= result.recipes
 
 
 const randomRecipe =(arr)=>{
@@ -53,7 +55,7 @@ fetchData()
 <input value={Search} onChange={(e)=>setSearch(e.target.value)} placeholder='enter maeal name'/>
 
 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 bg-gray-50 dark:bg-gray-900 p-10">
-  { data.filter((dt:myTypes)=>dt.name.toLowerCase().includes(Search.toLowerCase())).map((recipe)=>  (
+  { data.filter((dt)=>dt.name.toLowerCase().includes(Search.toLowerCase())).map((recipe)=>  (
 
     <div 
       key={recipe.id} 
