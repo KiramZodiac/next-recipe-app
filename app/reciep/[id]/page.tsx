@@ -1,5 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+import NavBar from '@/app/NavBar';
 
 interface myTypes{
     params:{
@@ -19,6 +21,7 @@ async function RecipeDetails({ params }:myTypes) {
 
   return (
     <div className="  justify-center items-center flex flex-col bg-pink-100 lg:h-screen w-screen sm:flex-col">
+ 
         <div className=' text-center text-5xl font-semibold text-slate-700 max-sm:text-3xl'>
 
         <h2> {recipe.name} </h2>
@@ -33,8 +36,6 @@ async function RecipeDetails({ params }:myTypes) {
         <li>{ingredient} </li>
     ))}
 </div>
-
-
         </div>
         <h1 className=' text-2xl font-bold'>Instructions</h1>
         <ol className=' list-decimal list-inside m-5 text-slate-700 font-semibold'>

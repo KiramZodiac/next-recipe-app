@@ -1,33 +1,59 @@
+"use client"
+
 import Link from 'next/link';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'; 
+import NavBar from '../NavBar';
 
 
-async function RecipesPage() {
-
-    const res = await fetch('https://dummyjson.com/recipes?limit=50')
-
-    const data = await res.json();
-const recipes = data.recipes;
-
-const suffledArray = (array:any)=>{
-
-for(let i = array.length -1;i >0; i-- ){
-  const a = Math.floor(Math.random()* (i + 1));
-  [array[i], array[a]] = [array[a], array[i]]
+interface myTypes{
+dt:{
+  name:string
 }
 
-return array
 }
 
-const shuffledREcipes = suffledArray(recipes)
+
+
+
+function RecipesPage() {
+  const [data,setData] = useState([])
+const [Search,setSearch] = useState('')
+
+
+useEffect(()=>{
+
+const fetchData = async()=>{
+
+const res = await fetch('https://dummyjson.com/recipes')
+const result = await res.json()
+const all = result.recipes
+
+
+const randomRecipe =(arr)=>{
+
+return arr.sort(()=> Math.random() - 0.5)
+
+}
+
+setData(randomRecipe(all))
+
+}
+fetchData()
+},[])
+
+
+
+
 
   return(
     <div>
+      <NavBar/>
     <h1 className=' text-4xl'>Chef's Recipe Book</h1>
+<input value={Search} onChange={(e)=>setSearch(e.target.value)} placeholder='enter maeal name'/>
+
 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 bg-gray-50 dark:bg-gray-900 p-10">
- 
-  {shuffledREcipes.map((recipe:any) => (
+  { data.filter((dt:myTypes)=>dt.name.toLowerCase().includes(Search.toLowerCase())).map((recipe)=>  (
 
     <div 
       key={recipe.id} 
@@ -55,7 +81,7 @@ const shuffledREcipes = suffledArray(recipes)
 
 <div className=" bg-slate-500 text-center w-1/2 justify-center flex items-center rounded-2xl">
 
-{recipe.difficulty ? 'hard': 'easy'}
+{recipe.difficulty }
 </div>
 
 </div>
@@ -66,6 +92,7 @@ const shuffledREcipes = suffledArray(recipes)
 </div>
 </div>
 
+  
 
 )
 
