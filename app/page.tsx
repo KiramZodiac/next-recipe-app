@@ -3,15 +3,12 @@
 
 import { signIn, signOut, useSession } from "next-auth/react";
 import GoogleIcon from '@mui/icons-material/Google';
- import Image from "next/image";
- import Link from "next/link";
-import Search from "./Search";
-import NavBar from "./NavBar";
+
 import RecipesPage from "./reciep/page";
 
 
 export default function Home() {
-
+  
   const { data: session } = useSession();
 
 // const imageURl = session?.user?.image || " "
@@ -19,7 +16,7 @@ export default function Home() {
   if (session) {
     return (
       <>
-        <h1>Welcome, {session.user?.name}</h1>
+        <h1>Welcome:{session.user?.name}</h1>
       <RecipesPage/>
         
      
@@ -35,7 +32,7 @@ export default function Home() {
       <div className=" w-1/2 h-1/2 rounded-md justify-center flex flex-col items-center gap-10 backdrop-blur-lg">
      
 
-    
+     <h1 className="  text-4xl font-semibold p-10">WELCOME TO THE TASTY TREASURES</h1>
 
 
      <div className=" bg-blue-500 rounded-lg flex items-center justify-center w-1/4 h-10 gap-3 hover:cursor-pointer">

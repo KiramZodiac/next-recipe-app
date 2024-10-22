@@ -1,14 +1,13 @@
 import React from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
-import NavBar from '@/app/NavBar';
+
 
 interface myTypes{
     params:{
         id:number
     },
 
-    ingredient:string[]
+    ingredient:Number[]
 
 }
 
@@ -33,7 +32,7 @@ async function RecipeDetails({ params }:myTypes) {
 <div className='p-10'>
     <h1 className=' font-semibold text-2xl'>Ingredients</h1>
     {recipe.ingredients.map((ingredient:string) => (
-        <li>{ingredient} </li>
+        <li key={ingredient.id}>{ingredient} </li>
     ))}
 </div>
         </div>

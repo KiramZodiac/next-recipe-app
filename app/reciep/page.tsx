@@ -49,7 +49,7 @@ fetchData()
   return(
     <div>
       <NavBar/>
-    <h1 className=' text-4xl'>Chef's Recipe Book</h1>
+
 <input value={Search} onChange={(e)=>setSearch(e.target.value)} placeholder='enter maeal name'/>
 
 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 bg-gray-50 dark:bg-gray-900 p-10">
