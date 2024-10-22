@@ -2,23 +2,24 @@ import React from 'react';
 import Image from 'next/image';
 
 
-interface myTypes{
-    params:{
-
-        id:Number;
-   
-      },
-
-    ingredient:string[]
+interface Recipe{
+ name:string;
+ image:string;
+ ingredients:string[];
+ instructions:string[];
 
 }
-
+interface myTypes{
+  params:{
+    id:number;
+  }
+}
 
 
 async function RecipeDetails({ params }:myTypes) {
   // Fetch the recipe data from the API
   const response = await fetch(`https://dummyjson.com/recipes/${params.id}`);
-  const recipe = await response.json();
+  const recipe:Recipe = await response.json();
 
   return (
     <div className="  justify-center items-center flex flex-col bg-pink-100 lg:h-screen w-screen sm:flex-col">
@@ -30,11 +31,11 @@ async function RecipeDetails({ params }:myTypes) {
 
         <div className=' p-10 lg:flex '>
 
-<Image src={recipe.image} width={600} height={600} alt={recipe.names} className=' rounded-xl' />
-<div className='p-10'>
+ <Image src={recipe.image} width={600} height={600} alt={recipe.name} className='rounded-xl'/>
+ <div className='p-10'>
     <h1 className=' font-semibold text-2xl'>Ingredients</h1>
-    {recipe.ingredients.map((ingredient) => (
-        <li key={ingredient.id}>{ingredient} </li>
+    {recipe.ingredients.map((ingredient,index) => (
+        <li key={index}>{ingredient} </li>
     ))}
 </div>
         </div>
