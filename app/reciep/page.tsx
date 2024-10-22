@@ -6,12 +6,7 @@ import Image from 'next/image';
 import NavBar from '../NavBar';
 
 
-interface myTypes{
-dt:{
-  name:string
-}
 
-}
 
 interface Recipe{
 name:string
@@ -32,7 +27,7 @@ const result = await res.json()
 const all:Recipe= result.recipes
 
 
-const randomRecipe =(arr)=>{
+const randomRecipe =(arr: any) => {
 
 return arr.sort(()=> Math.random() - 0.5)
 
@@ -55,7 +50,7 @@ fetchData()
 <input value={Search} onChange={(e)=>setSearch(e.target.value)} placeholder='enter maeal name'/>
 
 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 bg-gray-50 dark:bg-gray-900 p-10">
-  { data.filter((dt)=>dt.name.toLowerCase().includes(Search.toLowerCase())).map((recipe)=>  (
+  { data.filter((dt) => dt.name.toLowerCase().includes(Search.toLowerCase())).map((recipe) =>  (
 
     <div 
       key={recipe.id} 
