@@ -4,10 +4,12 @@ import Image from 'next/image';
 
 interface myTypes{
     params:{
-        id:number
-    },
 
-    ingredient:Number[]
+        id:Number;
+   
+      },
+
+    ingredient:string[]
 
 }
 
@@ -31,7 +33,7 @@ async function RecipeDetails({ params }:myTypes) {
 <Image src={recipe.image} width={600} height={600} alt={recipe.names} className=' rounded-xl' />
 <div className='p-10'>
     <h1 className=' font-semibold text-2xl'>Ingredients</h1>
-    {recipe.ingredients.map((ingredient:string) => (
+    {recipe.ingredients.map((ingredient) => (
         <li key={ingredient.id}>{ingredient} </li>
     ))}
 </div>
