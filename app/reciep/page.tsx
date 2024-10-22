@@ -27,7 +27,7 @@ const result = await res.json()
 const all:Recipe= result.recipes
 
 
-const randomRecipe =(arr: any) => {
+const randomRecipe =(arr) => {
 
 return arr.sort(()=> Math.random() - 0.5)
 
