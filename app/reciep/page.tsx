@@ -46,10 +46,11 @@ fetchData()
   return(
     <div>
       <NavBar/>
-
-<input value={Search} onChange={(e)=>setSearch(e.target.value)} placeholder='enter maeal name'/>
-
-<div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 bg-gray-50 dark:bg-gray-900 p-10">
+<div className=' flex justify-center p-10 '>
+<input value={Search} onChange={(e)=>setSearch(e.target.value)} placeholder='Serach recipe ' className=' border-solid border-2 
+h-8 w-60 rounded-md items-center  p-2 align-middle'/>
+</div>
+<div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 bg-gray-50 dark:bg-gray-900 p-10 max-h-screen">
   { data.filter((dt) => dt.name.toLowerCase().includes(Search.toLowerCase())).map((recipe) =>  (
 
     <div 
@@ -68,9 +69,10 @@ fetchData()
           {recipe.name}
         </h5>
         <div className='flex justify-between'>
+        
         <Link
           href={`/reciep/${recipe.id}`} 
-          className="inline-block px-3 py-2 text-xs font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors duration-300"
+          className="inline-block px-3 py-2 text-xs font-medium text-center text-white bg-blue-600 hover:rounded-2xl rounded-lg hover:bg-blue-700 transition-colors duration-300"
         >
           View Recipe
         </Link>

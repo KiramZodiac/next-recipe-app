@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import NavBar from '@/app/NavBar';
 
 
 interface Recipe{
@@ -22,20 +23,22 @@ async function RecipeDetails({ params }:myTypes) {
   const recipe:Recipe = await response.json();
 
   return (
-    <div className="  justify-center items-center flex flex-col bg-pink-100 lg:h-screen w-screen sm:flex-col">
+    <div className=''>
+      <NavBar/>
+    <div className="  justify-center items-center flex flex-col bg-pink-100 lg:h-screen sm:flex-col pt-7">
  
         <div className=' text-center text-5xl font-semibold text-slate-700 max-sm:text-3xl'>
 
         <h2> {recipe.name} </h2>
         </div>
 
-        <div className=' p-10 lg:flex '>
+        <div className='lg:flex p-3 gap-24 '>
 
  <Image src={recipe.image} width={600} height={600} alt={recipe.name} className='rounded-xl'/>
- <div className='p-10'>
+ <div className=' flex justify-center flex-col max-sm:pl-28'>
     <h1 className=' font-semibold text-2xl'>Ingredients</h1>
     {recipe.ingredients.map((ingredient,index) => (
-        <li key={index}>{ingredient} </li>
+        <li className='text-slate-700 ' key={index}>{ingredient} </li>
     ))}
 </div>
         </div>
@@ -48,7 +51,7 @@ async function RecipeDetails({ params }:myTypes) {
    
   ))}
  </ol>
-    </div>
+    </div></div>
   );
 }
 
