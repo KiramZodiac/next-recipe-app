@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import NavBar from '@/app/NavBar';
+import { GetServerSideProps } from 'next';
 
 interface Recipe {
   name: string;
@@ -11,25 +12,31 @@ interface Recipe {
 
 interface MyTypes {
   params: {
-    id: string; // Change to string since route parameters are strings
+    id: string; // Keep id as string
   };
 }
 
-async function RecipeDetails({ params }: MyTypes) {
-  // Fetch the recipe data from the API
-  const response = await fetch(`https://dummyjson.com/recipes/${params.id}`);
+// Use GetServerSideProps to fetch data server-side
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { id } = context.params as { id: string }; // Ensure id is a string
+  const response = await fetch(`https://dummyjson.com/recipes/${id}`);
 
   if (!response.ok) {
-    // Handle fetch error (e.g., recipe not found)
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <h1 className="text-2xl font-bold text-red-600">Recipe not found!</h1>
-      </div>
-    );
+    return {
+      notFound: true, // This will show a 404 page if the recipe is not found
+    };
   }
 
   const recipe: Recipe = await response.json();
 
+  return {
+    props: {
+      recipe, // Pass the recipe data as props
+    },
+  };
+};
+
+async function RecipeDetails({ recipe }: { recipe: Recipe }) {
   return (
     <div>
       <NavBar />
