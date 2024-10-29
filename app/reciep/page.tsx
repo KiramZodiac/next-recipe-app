@@ -47,6 +47,10 @@ fetchData()
     <div>
       <NavBar/>
 <div className=' flex justify-center p-10 '>
+  <div className=' w-1/2 '>
+  <h1 className=' font-extrabold text-5xl'>Welcome to the chefs Secrets</h1>
+  </div>
+
 <input value={Search} onChange={(e)=>setSearch(e.target.value)} placeholder='Serach recipe ' className=' border-solid border-2 
 h-8 w-60 rounded-md items-center  p-2 align-middle'/>
 </div>
