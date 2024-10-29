@@ -1,5 +1,5 @@
 import { authOptions } from "@/app/lib/authOptions";
-import NextAuth, { AuthOptions } from "next-auth";
+import NextAuth from "next-auth";
 
 
 // Default export NextAuth with the options
