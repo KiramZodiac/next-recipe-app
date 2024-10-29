@@ -19,9 +19,7 @@ const {data:session}= useSession()
       <Image height={200} width={200} alt='user image' src={session?.user?.image || ""} className ='rounded-3xl w-10'/>
     <h2> {session?.user?.name}</h2></div>
      
-     
-   
-      <div className="flex items-center justify-end space-x-6 ">
+<div className="flex items-center justify-end space-x-6 ">
   <Link 
     className="text-xl text-gray-900 dark:text-gray-100 hover:text-blue-500 transition-colors duration-200" 
     href={'/'}>

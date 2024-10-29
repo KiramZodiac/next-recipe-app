@@ -1,12 +1,11 @@
 "use client";
 
 
-import { signIn, signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 
 import RecipesPage from "./reciep/page";
-import { useRouter } from "next/router";
-import { Login } from "@mui/icons-material";
+
 import SignIn from "./login/SignIn";
 
 
