@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react";
 import RecipesPage from "./reciep/page";
 
 import SignIn from "./login/SignIn";
+import NavBar from "./NavBar";
 
 
 export default function Home() {
@@ -18,21 +19,14 @@ if(status ==="loading"){
   return <div>Loading</div>
 }
 
-
   if (!session) {
    return <div>
-
-
 <SignIn/>
-
-
    </div>
-
-
   }
-
   return (
    <div>
+    <NavBar/>
     <RecipesPage/>
    </div>
   );

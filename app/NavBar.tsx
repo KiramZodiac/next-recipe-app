@@ -30,11 +30,7 @@ const {data:session}= useSession()
     href={'/testimonials'}>
     Testimonials
   </Link>
-  <Link 
-    className="text-xl text-gray-900 dark:text-gray-100 hover:text-blue-500 transition-colors duration-200" 
-    href={'/'}>
-    Contact
-  </Link>
+
   <button 
     className="text-xl text-red-600 dark:text-red-400 hover:text-red-800 transition-colors duration-200" onClick={()=>signOut()}>
     LogOut
