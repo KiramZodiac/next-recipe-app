@@ -13,7 +13,7 @@ const {data:session}= useSession()
 
 
   return (
-    <div className=" bg-slate-300 w-full top-0  shadow-dark-mild dark:bg-neutral-700 lg:py-4 lg:pr-44 h-20">
+    <div className=" flex  bg-slate-300 w-full  shadow-dark-mild dark:bg-neutral-700 border-b">
     <div className="flex justify-between items-center w-full px-3">
       <div className=' gap-2 flex '>
       <Image height={200} width={200} alt='user image' src={session?.user?.image || ""} className ='rounded-3xl w-10'/>
@@ -26,13 +26,13 @@ const {data:session}= useSession()
     Recipes
   </Link>
   <Link 
-    className="text-xl text-gray-900 dark:text-gray-100 hover:text-blue-500 transition-colors duration-200" 
+    className=" text-gray-900 dark:text-gray-100 hover:text-blue-500 transition-colors duration-200" 
     href={'/testimonials'}>
     Testimonials
   </Link>
 
   <button 
-    className="text-xl text-red-600 dark:text-red-400 hover:text-red-800 transition-colors duration-200" onClick={()=>signOut()}>
+    className="text-xl text-red-700 hover:text-red-400 transition-colors duration-200" onClick={()=>signOut()}>
     LogOut
   </button>
 </div>
