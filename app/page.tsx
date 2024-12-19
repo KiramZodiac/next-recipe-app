@@ -25,7 +25,7 @@ if(status ==="loading"){
    </div>
   }
   return (
-   <div className=" p-10">
+   <div className="p-5">
     <NavBar/>
     <RecipesPage/>
    </div>
