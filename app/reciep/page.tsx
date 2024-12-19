@@ -41,7 +41,7 @@ function RecipesPage() {
         <div className="w-1/2">
           <h1 className="font-extrabold text-5xl">Welcome to the Chefs{"'"} Secrets</h1>
         </div>
-
+        {/* http://localhost:3000/api/auth/callback/google */}
         <div>
           <label htmlFor="search" className="sr-only">
             Search Recipes
