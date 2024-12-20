@@ -67,7 +67,7 @@ async function RecipeDetails(props: { params: tParams }) {
       {/* Footer */}
       <footer className="py-6 bg-gray-100 dark:bg-gray-800 text-center">
         <p className="text-gray-600 dark:text-gray-400">
-          &copy; 2024 Chefs' Secrets by Kiram Zodiac. All rights reserved.
+          &copy; 2024 Chefs{"'"} Secrets by Kiram Zodiac. All rights reserved.
         </p>
       </footer>
     </div>

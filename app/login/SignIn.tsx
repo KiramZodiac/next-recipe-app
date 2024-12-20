@@ -7,7 +7,7 @@ function SignIn() {
     <div className="h-screen bg-cover bg-center bg-[url('/pic4.jpeg')] flex items-center justify-center">
       <div className="bg-white/70 dark:bg-gray-900/80 backdrop-blur-md rounded-xl shadow-lg p-10 w-11/12 max-w-md text-center space-y-8">
         <h1 className="text-3xl lg:text-4xl font-extrabold text-gray-800 dark:text-white">
-          Welcome to Chef Kiram's Recipes
+          Welcome to Chef Kiram{"'"}s Recipes
         </h1>
         <p className="text-gray-600 dark:text-gray-300">
           Discover exclusive recipes and culinary secrets by signing in.
