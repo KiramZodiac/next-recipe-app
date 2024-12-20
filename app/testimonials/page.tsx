@@ -5,7 +5,7 @@ function Testimonials() {
   return (
     <div>
         <NavBar/>
-      <h2>Testimonials</h2>
+      <h2>Testimonials still in development...</h2>
     </div>
   )
 }

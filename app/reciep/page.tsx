@@ -4,7 +4,7 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 
-interface Reciepe {
+interface Recipe {
   id: number;
   name: string;
   difficulty: string;
@@ -12,7 +12,7 @@ interface Reciepe {
 }
 
 function RecipesPage() {
-  const [data, setData] = useState<Reciepe[]>([]);
+  const [data, setData] = useState<Recipe[]>([]);
   const [search, setSearch] = useState('');
 
   useEffect(() => {
@@ -20,9 +20,9 @@ function RecipesPage() {
       try {
         const res = await fetch('https://dummyjson.com/recipes?limit=50');
         const result = await res.json();
-        const all: Reciepe[] = result.recipes;
+        const all: Recipe[] = result.recipes;
 
-        const randomRecipe = (arr: Reciepe[]): Reciepe[] => {
+        const randomRecipe = (arr: Recipe[]): Recipe[] => {
           return arr.sort(() => Math.random() - 0.5);
         };
 
@@ -36,64 +36,68 @@ function RecipesPage() {
   }, []);
 
   return (
-    <div>
-      <div className="flex justify-center p-10 max-sm:flex-col gap-10 items-center bg-white w-full">
-        <div className=" max-sm:w-96">
-          <h1 className="font-extrabold text-5xl text-center flex justify-center items-center">Welcome to the Chefs{"'"} Secrets</h1>
-        </div>
-
-        <div>
-          <label htmlFor="search" className="sr-only text-center">
-            Search Recipes
-          </label>
+    <div className="min-h-screen bg-gradient-to-b from-white to-gray-100 dark:from-gray-900 dark:to-gray-800">
+      {/* Header Section */}
+      <header className="flex flex-col items-center justify-center py-16 bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
+        <h1 className="text-4xl sm:text-5xl font-extrabold text-center">
+          Welcome to the Chefs{"'"} Secrets
+        </h1>
+        <p className="mt-4 text-center text-lg sm:text-xl">
+          Discover, Explore, and Enjoy Delicious Recipes
+        </p>
+        <div className="mt-6">
           <input
             id="search"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search recipes"
-            className="border-solid border-2 h-8 w-60 rounded-md items-center p-2"
+            className="w-80 sm:w-96 px-4 py-2 rounded-lg shadow-lg text-gray-700 dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700 border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:outline-none"
           />
         </div>
-      </div>
+      </header>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 bg-gray-50
-       p-10 max-h-screen">
-        {data
-          .filter((recipe) =>
-            recipe.name.toLowerCase().includes(search.toLowerCase())
-          )
-          .map((recipe) => (
-            <div
-              key={recipe.id}
-              className="w-full max-w-xs mx-auto bg-white rounded-lg border border-gray-200 shadow-md overflow-hidden transition-transform duration-300 hover:scale-105 dark:bg-gray-800 dark:border-gray-700"
-            >
-              <Image
-                width={150}
-                height={150}
-                alt={recipe.name}
-                src={recipe.image}
-                className="object-cover w-full h-36"
-              />
-              <div className="p-4">
-                <h5 className="text-lg font-bold text-gray-900 mb-2 dark:text-white">
-                  {recipe.name}
-                </h5>
-                <div className="flex justify-between">
-                  <Link
-                    href={`/reciep/${recipe.id}`}
-                    className="inline-block px-3 py-2 text-xs font-medium text-center text-white bg-blue-600 hover:rounded-2xl rounded-lg hover:bg-blue-700 transition-colors duration-300"
-                  >
-                    View Recipe
-                  </Link>
+      {/* Recipes Grid */}
+      <main className="container mx-auto px-4 py-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          {data
+            .filter((recipe) =>
+              recipe.name.toLowerCase().includes(search.toLowerCase())
+            )
+            .map((recipe) => (
+              <div
+                key={recipe.id}
+                className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105"
+              >
+                {/* Recipe Image */}
+                <Image
+                  width={300}
+                  height={200}
+                  alt={recipe.name}
+                  src={recipe.image}
+                  className="object-cover w-full h-48"
+                />
 
-                  <div className="bg-slate-500 text-center w-1/2 justify-center flex items-center rounded-2xl">
-                    {recipe.difficulty}
+                {/* Recipe Details */}
+                <div className="p-6">
+                  <h5 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+                    {recipe.name}
+                  </h5>
+                  <div className="flex items-center justify-between">
+                    <Link
+                      href={`/reciep/${recipe.id}`}
+                      className="px-4 py-2 text-sm font-medium text-center text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors duration-300"
+                    >
+                      View Recipe
+                    </Link>
+                    <span className="inline-block px-3 py-1 text-xs font-semibold bg-gray-200 dark:bg-gray-700 dark:text-gray-300 text-gray-700 rounded-lg">
+                      {recipe.difficulty}
+                    </span>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
-      </div>
+            ))}
+        </div>
+      </main>
     </div>
   );
 }
