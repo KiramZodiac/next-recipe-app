@@ -39,11 +39,11 @@ function RecipesPage() {
     <div>
       <div className="flex justify-center p-10 max-sm:flex-col gap-10 items-center bg-white w-full">
         <div className=" max-sm:w-96">
-          <h1 className="font-extrabold text-5xl">Welcome to the Chefs{"'"} Secrets</h1>
+          <h1 className="font-extrabold text-5xl text-center flex justify-center items-center">Welcome to the Chefs{"'"} Secrets</h1>
         </div>
 
         <div>
-          <label htmlFor="search" className="sr-only">
+          <label htmlFor="search" className="sr-only text-center">
             Search Recipes
           </label>
           <input

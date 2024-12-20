@@ -25,7 +25,7 @@ if(status ==="loading"){
    </div>
   }
   return (
-   <div className="p-5">
+   <div className=" flex flex-col ">
     <NavBar/>
     <RecipesPage/>
    </div>
