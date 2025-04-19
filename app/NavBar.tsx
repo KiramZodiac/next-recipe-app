@@ -2,17 +2,29 @@
 
 import Link from 'next/link'
 import React, { useState } from 'react'
-import { signOut, useSession } from 'next-auth/react'
+import { signIn, signOut, useSession } from 'next-auth/react'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
+import { Button } from '@/components/ui/button'
 
 function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const { data: session, status } = useSession()
+  const activeRoute = usePathname()
 
   const links = [
     {
       title: 'Recipes',
       href: '/'
+    },
+    
+    {
+      title: 'Saved Recipes',
+      href: '/savedRecipes'
+    },
+    {
+      title: 'Add Recipe',
+      href: '/addRecipe'
     },
     {
       title: 'Testimonials',
@@ -20,8 +32,7 @@ function NavBar() {
     },
   ]
 
-  const { data: session } = useSession()
-  const activeRoute = usePathname()
+  const isLoggedIn = status === 'authenticated'
 
   return (
     <nav className="flex w-full shadow-md border-b p-4 sm:p-5 bg-white flex-col sm:flex-row sm:items-center sm:justify-between">
@@ -32,7 +43,7 @@ function NavBar() {
             height={200}
             width={200}
             alt="user image"
-            src={session?.user?.image || "/default-avatar.png"} // Provide a fallback image
+            src={session?.user?.image || "/default-avatar.webp"} 
             className="rounded-full w-10 h-10"
           />
           <h2 className="text-lg font-semibold">{session?.user?.name || 'Guest'}</h2>
@@ -48,7 +59,7 @@ function NavBar() {
         </button>
       </div>
 
-      {/* Links and Logout Button */}
+     
       <div
         className={`${
           menuOpen ? 'block' : 'hidden'
@@ -70,12 +81,11 @@ function NavBar() {
           ))}
         </div>
 
-        <button
-          onClick={() => signOut()}
-          className="text-base font-semibold text-red-600 hover:text-red-400 transition-colors duration-200"
-        >
-          LOGOUT
-        </button>
+        {isLoggedIn ? (
+          <Button onClick={() => signOut()}>Log Out</Button>
+        ) : (
+          <Button onClick={() => signIn()}>Log In</Button>
+        )}
       </div>
     </nav>
   )

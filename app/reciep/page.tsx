@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import Loading from '../Loading';
+
 
 interface Recipe {
   id: number;
@@ -14,13 +16,19 @@ interface Recipe {
 function RecipesPage() {
   const [data, setData] = useState<Recipe[]>([]);
   const [search, setSearch] = useState('');
+  const [loading,setLoading] = useState(true)
+  
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const res = await fetch('https://dummyjson.com/recipes?limit=50');
+
+
         const result = await res.json();
         const all: Recipe[] = result.recipes;
+        console.log(all);
+        
 
         const randomRecipe = (arr: Recipe[]): Recipe[] => {
           return arr.sort(() => Math.random() - 0.5);
@@ -29,11 +37,14 @@ function RecipesPage() {
         setData(randomRecipe(all));
       } catch (error) {
         console.error('Error fetching data:', error);
+      } finally{
+        setLoading(false)
       }
     };
 
     fetchData();
   }, []);
+
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-100 dark:from-gray-900 dark:to-gray-800">
@@ -57,6 +68,9 @@ function RecipesPage() {
       </header>
 
       {/* Recipes Grid */}
+      {loading ? <Loading/>:
+      
+
       <main className="container mx-auto px-4 py-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           {data
@@ -70,14 +84,22 @@ function RecipesPage() {
               >
                 {/* Recipe Image */}
                 <Image
-                  width={300}
-                  height={200}
+                  width={400}
+                  height={400}
                   alt={recipe.name}
-                  src={recipe.image}
-                  className="object-cover w-full h-48"
+                  src={recipe.image || "/placeholder.jpeg"}
+                
+                  loading="lazy"
+                  placeholder="blur"
+                  blurDataURL="/placeholder.jpeg"
+                  className="rounded-t-lg"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  quality={100}
+                 
                 />
 
                 {/* Recipe Details */}
+
                 <div className="p-6">
                   <h5 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
                     {recipe.name}
@@ -89,6 +111,9 @@ function RecipesPage() {
                     >
                       View Recipe
                     </Link>
+
+
+
                     <span className="inline-block px-3 py-1 text-xs font-semibold bg-gray-200 dark:bg-gray-700 dark:text-gray-300 text-gray-700 rounded-lg">
                       {recipe.difficulty}
                     </span>
@@ -98,6 +123,7 @@ function RecipesPage() {
             ))}
         </div>
       </main>
+      }
     </div>
   );
 }
