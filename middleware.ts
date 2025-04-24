@@ -8,7 +8,7 @@ export async function middleware(req: NextRequest) {
     secret: process.env.NEXTAUTH_SECRET, // MUST MATCH
   })
 
-  const protectedRoutes = ['/savedRecipes', '/addRecipe']
+  const protectedRoutes = ['/savedRecipes', '/addRecipe','/testimonials']
 
   if (protectedRoutes.some((route) => req.nextUrl.pathname.startsWith(route))) {
     if (!token) {
